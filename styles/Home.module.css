@@ -10,6 +10,14 @@
   padding: 2rem;
 }
 
+.main.light {
+  background-image: linear-gradient(to bottom right, #007cf0, #9c27b0);
+}
+
+.main.dark {
+  background-image: linear-gradient(to bottom right, #282c34, #4a0072);
+}
+
 .container {
   text-align: center;
   max-width: 800px;
@@ -42,5 +50,25 @@
 }
 
 .counter button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.themeToggle {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.themeToggle button {
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: white;
+  border: none;
+  border-radius: 4px;
+  color: #007cf0;
+}
+
+.themeToggle button:hover {
   background-color: rgba(255, 255, 255, 0.8);
 }

@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import Head from 'next/head';
+import { useTheme } from '../ThemeContext';
 import styles from '@/styles/Home.module.css';
 
 export default function Home() {
+  const { theme, toggleTheme } = useTheme();
   const [count, setCount] = useState(0);
 
   return (
@@ -13,7 +15,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <main className={`${styles.main} ${styles[theme]}`}>
         <div className={styles.container}>
         <h1 className={styles.title}>Welcome to the React Showcase</h1>
           <p className={styles.description}>
@@ -25,6 +27,9 @@ export default function Home() {
           <p>{count}</p>
           <button onClick={() => setCount(count + 1)}>Increment</button>
           <button onClick={() => setCount(count - 1)}>Decrement</button>
+        </div>
+        <div className={styles.themeToggle}>
+          <button onClick={toggleTheme}>Toggle Theme</button>
         </div>
       </main>
     </>
