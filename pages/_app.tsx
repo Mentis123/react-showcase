@@ -1,4 +1,4 @@
-import { ThemeProvider } from '../ThemeContext';
+import { ThemeProvider } from '../contexts/ThemeContext';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 
