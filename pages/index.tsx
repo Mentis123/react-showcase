@@ -12,8 +12,8 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.container}>
-          <h1>Welcome to the React Showcase</h1>
-          <p>
+          <h1 className={styles.title}>Welcome to the React Showcase</h1>
+          <p className={styles.description}>
             Embark on a fantastical adventure into a magical world where you can explore and discover the boundless potential of React. Unleash your creativity as you dive into a realm filled with awe-inspiring components and mesmerizing interactions. This enchanted land will reveal the secrets to enhancing your React applications, transforming them into captivating experiences that will leave your users spellbound.
           </p>
         </div>
