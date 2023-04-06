@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import Head from 'next/head';
 import styles from '@/styles/Home.module.css';
 
 export default function Home() {
+  const [count, setCount] = useState(0);
+
   return (
     <>
       <Head>
@@ -12,10 +15,16 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.container}>
-          <h1 className={styles.title}>Welcome to the React Showcase</h1>
+        <h1 className={styles.title}>Welcome to the React Showcase</h1>
           <p className={styles.description}>
             Embark on a fantastical adventure into a magical world where you can explore and discover the boundless potential of React. Unleash your creativity as you dive into a realm filled with awe-inspiring components and mesmerizing interactions. This enchanted land will reveal the secrets to enhancing your React applications, transforming them into captivating experiences that will leave your users spellbound.
           </p>
+        </div>
+        <div className={styles.counter}>
+          <h2>Counter</h2>
+          <p>{count}</p>
+          <button onClick={() => setCount(count + 1)}>Increment</button>
+          <button onClick={() => setCount(count - 1)}>Decrement</button>
         </div>
       </main>
     </>
