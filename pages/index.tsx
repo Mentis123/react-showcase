@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Head from 'next/head';
-import { useTheme } from '../ThemeContext';
+import { useTheme } from '../contexts/ThemeContext';
 import styles from '@/styles/Home.module.css';
 
 export default function Home() {
