@@ -34,15 +34,15 @@ export default function Home() {
         <div className={styles.themeToggle}>
           <button onClick={toggleTheme}>Toggle Theme</button>
         </div>
-
+<br></br>
         <Carousel
   autoPlay
   infiniteLoop
   showStatus={false}
   showThumbs={false}
-  interval={3000}
-  showArrows={false}
-  stopOnHover={false}
+  interval={4000}
+  showArrows={true}
+  stopOnHover={true}
 >
   <div>
     <Image src="/images/carousel-image-1.jpg" alt="Carousel Image 1" width={600} height={600} />
