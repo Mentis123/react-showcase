@@ -18,6 +18,7 @@ export default function Home() {
     <>
      <div className={styles.themeToggle}>
           <button onClick={toggleTheme}>Light/Dark Mode</button>
+          <br></br>
         </div>
       <Head>
         <title>React Showcase</title>
