@@ -2,6 +2,9 @@ import { useState } from 'react';
 import Head from 'next/head';
 import { useTheme } from '../contexts/ThemeContext';
 import styles from '@/styles/Home.module.css';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import the carousel styles
+import Image from 'next/image';
 
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
@@ -33,24 +36,24 @@ export default function Home() {
         </div>
 
         <Carousel
-            autoPlay
-            infiniteLoop
-            showStatus={false}
-            showThumbs={false}
-            interval={3000}
-            showArrows={false}
-            stopOnHover={false}
-          >
-            <div>
-              <img src="/images/carousel-image-1.jpg" alt="Carousel Image 1" />
-            </div>
-            <div>
-              <img src="/images/carousel-image-2.jpg" alt="Carousel Image 2" />
-            </div>
-            <div>
-              <img src="/images/carousel-image-3.jpg" alt="Carousel Image 3" />
-            </div>
-        </Carousel>
+  autoPlay
+  infiniteLoop
+  showStatus={false}
+  showThumbs={false}
+  interval={3000}
+  showArrows={false}
+  stopOnHover={false}
+>
+  <div>
+    <Image src="/images/carousel-image-1.jpg" alt="Carousel Image 1" width={800} height={600} />
+  </div>
+  <div>
+    <Image src="/images/carousel-image-2.jpg" alt="Carousel Image 2" width={800} height={600} />
+  </div>
+  <div>
+    <Image src="/images/carousel-image-3.jpg" alt="Carousel Image 3" width={800} height={600} />
+  </div>
+</Carousel>
 
       </main>
     </>
