@@ -45,13 +45,13 @@ export default function Home() {
   stopOnHover={false}
 >
   <div>
-    <Image src="/images/carousel-image-1.jpg" alt="Carousel Image 1" width={800} height={600} />
+    <Image src="/images/carousel-image-1.jpg" alt="Carousel Image 1" width={600} height={600} />
   </div>
   <div>
-    <Image src="/images/carousel-image-2.jpg" alt="Carousel Image 2" width={800} height={600} />
+    <Image src="/images/carousel-image-2.jpg" alt="Carousel Image 2" width={600} height={600} />
   </div>
   <div>
-    <Image src="/images/carousel-image-3.jpg" alt="Carousel Image 3" width={800} height={600} />
+    <Image src="/images/carousel-image-3.jpg" alt="Carousel Image 3" width={600} height={600} />
   </div>
 </Carousel>
 
