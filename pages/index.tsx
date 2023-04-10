@@ -16,6 +16,9 @@ export default function Home() {
 
   return (
     <>
+     <div className={styles.themeToggle}>
+          <button onClick={toggleTheme}>Light/Dark Mode</button>
+        </div>
       <Head>
         <title>React Showcase</title>
         <meta name="description" content="Welcome to the React Showcase" />
@@ -35,9 +38,7 @@ export default function Home() {
           <button onClick={() => setCount(count + 1)}>Increment</button>
           <button onClick={() => setCount(count - 1)}>Decrement</button>
         </div>
-        <div className={styles.themeToggle}>
-          <button onClick={toggleTheme}>Toggle Theme</button>
-        </div>
+       
 <br></br>
 <div style={carouselContainerStyle}>
   <Carousel
