@@ -32,38 +32,25 @@ export default function Home() {
           <button onClick={toggleTheme}>Toggle Theme</button>
         </div>
 
-        import React, { useState } from 'react';
-import { generateChatCompletion } from './gpt4Api';
-
-function App() {
-  const [userInput, setUserInput] = useState('');
-  const [responseText, setResponseText] = useState('');
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const result = await generateChatCompletion(userInput);
-    setResponseText(result);
-  };
-
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Please enter your question:
-          <input
-            type="text"
-            value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
-          />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
-      {responseText && <p>Response: {responseText}</p>}
-    </div>
-  );
-}
-
-export default App;
+        <Carousel
+            autoPlay
+            infiniteLoop
+            showStatus={false}
+            showThumbs={false}
+            interval={3000}
+            showArrows={false}
+            stopOnHover={false}
+          >
+            <div>
+              <img src="/images/carousel-image-1.jpg" alt="Carousel Image 1" />
+            </div>
+            <div>
+              <img src="/images/carousel-image-2.jpg" alt="Carousel Image 2" />
+            </div>
+            <div>
+              <img src="/images/carousel-image-3.jpg" alt="Carousel Image 3" />
+            </div>
+        </Carousel>
 
       </main>
     </>
