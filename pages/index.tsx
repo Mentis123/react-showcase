@@ -9,6 +9,10 @@ import Image from 'next/image';
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
   const [count, setCount] = useState(0);
+  const carouselContainerStyle = {
+    maxWidth: '600px', // Set the maximum width to match your image dimensions
+    margin: '0 auto', // Center the container horizontally
+  };
 
   return (
     <>
@@ -35,25 +39,27 @@ export default function Home() {
           <button onClick={toggleTheme}>Toggle Theme</button>
         </div>
 <br></br>
-        <Carousel
-  autoPlay
-  infiniteLoop
-  showStatus={false}
-  showThumbs={false}
-  interval={4000}
-  showArrows={true}
-  stopOnHover={true}
->
-  <div>
-    <Image src="/images/carousel-image-1.jpg" alt="Carousel Image 1" width={600} height={600} />
-  </div>
-  <div>
-    <Image src="/images/carousel-image-2.jpg" alt="Carousel Image 2" width={600} height={600} />
-  </div>
-  <div>
-    <Image src="/images/carousel-image-3.jpg" alt="Carousel Image 3" width={600} height={600} />
-  </div>
-</Carousel>
+<div style={carouselContainerStyle}>
+  <Carousel
+    autoPlay
+    infiniteLoop
+    showStatus={false}
+    showThumbs={false}
+    interval={3000}
+    showArrows={false}
+    stopOnHover={false}
+  >
+    <div>
+      <Image src="/images/carousel-image-1.jpg" alt="Carousel Image 1" width={600} height={600} />
+    </div>
+    <div>
+      <Image src="/images/carousel-image-2.jpg" alt="Carousel Image 2" width={600} height={600} />
+    </div>
+    <div>
+      <Image src="/images/carousel-image-3.jpg" alt="Carousel Image 3" width={600} height={600} />
+    </div>
+  </Carousel>
+</div>
 
       </main>
     </>
