@@ -43,7 +43,7 @@
     
                 update() {
                     this.x -= this.speed;
-                    this.radius += this.speed * 0.05; // Gradually increase the star's radius
+                    this.radius += this.speed * 0.005; // Gradually increase the star's radius
     
                     if (this.x < -this.radius) {
                         this.x = canvas.width + this.radius;
