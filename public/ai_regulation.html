@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Regulation Tables</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 40px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    @media screen and (max-width: 600px) {
+      table, th, td {
+        display: block;
+      }
+
+      th, td {
+        border: none;
+        padding: 10px;
+        position: relative;
+      }
+
+      th {
+        background-color: transparent;
+        font-weight: normal;
+        margin-bottom: 10px;
+      }
+
+      td:before {
+        content: attr(data-label);
+        display: block;
+        font-weight: bold;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>AI Regulation: Society vs. Corporations</h1>
+
+  <table>
+    <caption>Society</caption>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Benefit</th>
+        <th>Potential Exploitation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Privacy & Data Protection</td>
+        <td>Protects user data from misuse, promoting individual privacy.</td>
+        <td>Corporations or governments could exploit loopholes to collect and sell personal data without consent.</td>
+      </tr>
+      <tr>
+        <td>Bias & Fairness</td>
+        <td>Reduces discrimination and promotes inclusivity in AI systems.</td>
+        <td>Unintentional or intentional biases in AI development could exacerbate existing inequalities.</td>
+      </tr>
+      <tr>
+        <td>Transparency & Accountability</td>
+        <td>Helps citizens understand AI systems and hold developers accountable.</td>
+        <td>Companies might use transparency as a marketing tool while obfuscating problematic aspects of their AI systems.</td>
+      </tr>
+      <tr>
+        <td>Job Displacement</td>
+        <td>Assists in preparing and transitioning workers to new opportunities.</td>
+        <td>Corporations could exploit regulation to automate jobs with minimal responsibility for worker retraining or welfare.</td>
+      </tr>
+      <tr>
+        <td>Security</td>
+        <td>Ensures responsible AI development to prevent malicious use.</td>
+        <td>Bad actors could exploit weak or inconsistent regulations to develop harmful AI applications.</td>
+      </tr>
+    </tbody>
+  </table>
+  <table>
+    <caption>Corporations</caption>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Benefit</th>
+        <th>Potential Exploitation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Clear Guidelines</td>
+        <td>Provides a framework for AI development, reducing uncertainties and risks.</td>
+        <td>Companies could exploit loopholes to avoid compliance, creating an unfair advantage.</td>
+      </tr>
+      <tr>
+        <td>Level Playing Field</td>
+        <td>Establishes consistent standards to prevent unfair competition.</td>
+        <td>Dominant corporations could lobby for regulations that stifle competition or hinder innovation.</td>
+      </tr>
+      <tr>
+        <td>Public Trust</td>
+        <td>Improves trust in AI technologies and the corporations that develop them.</td>
+        <td>Some corporations could use public trust to hide unethical practices or monopolistic behavior.</td>
+      </tr>
+      <tr>
+        <td>Innovation</td>
+        <td>Spurs responsible development and incentives to address societal needs.</td>
+        <td>Companies could use the guise of innovation to evade regulation and engage in harmful practices.</td>
+      </tr>
+      <tr>
+        <td>Global Collaboration</td>
+        <td>Facilitates international cooperation and efficient operation in global markets.</td>
+        <td>Firms could exploit differing regulations between countries, engaging in regulatory arbitrage.</td>
+      </tr>
+    </tbody>
+  </table>
+  
+</body>
+</html>
