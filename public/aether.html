@@ -60,9 +60,9 @@
                     const x = Math.random() * canvas.width;
                     const y = Math.random() * canvas.height;
                     const radius = Math.random() * 2;
-                    const hue = Math.random() * 35; // Varying hue between 0 and 35
-                    const saturation = Math.random() * 30 + 70; // Varying saturation between 70 and 100
-                    const lightness = Math.random() * 20 + 50; // Varying lightness between 50 and 70
+                    const hue = Math.random() * 35;
+                    const saturation = Math.random() * 30 + 70;
+                    const lightness = Math.random() * 20 + 50;
                     const color = `hsla(${hue}, ${saturation}%, ${lightness}%, ${Math.random() * 0.8 + 0.2})`;
                     const speed = Math.random() * 3 + 0.5;
     
@@ -74,6 +74,10 @@
     
             const stars = createStars(500);
     
+            const hackGPTImage = new Image();
+            hackGPTImage.src = 'hackgpt.jpg';
+            let imageX = canvas.width;
+    
             function animate() {
                 requestAnimationFrame(animate);
                 ctx.fillStyle = 'black';
@@ -83,6 +87,14 @@
                     star.update();
                     star.draw();
                 }
+    
+                // Draw and update the position of the hackgpt.jpg image
+                ctx.drawImage(hackGPTImage, imageX, canvas.height / 2 - hackGPTImage.height / 2);
+                imageX -= 2; // Adjust the speed of the image movement
+    
+                if (imageX < -hackGPTImage.width) {
+                    imageX = canvas.width;
+                }
             }
     
             animate();
@@ -90,5 +102,5 @@
     
         window.addEventListener('load', init);
     </script>    
-    </body>
+</body>
 </html>
