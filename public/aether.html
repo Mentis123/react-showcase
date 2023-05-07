@@ -43,12 +43,12 @@
     
                 update() {
                     this.x -= this.speed;
-                    this.radius += this.speed * 0.005; // Gradually increase the star's radius
+                    this.radius += this.speed * 0.01;
     
                     if (this.x < -this.radius) {
                         this.x = canvas.width + this.radius;
                         this.y = Math.random() * canvas.height;
-                        this.radius = Math.random() * 2; // Reset the star's radius
+                        this.radius = Math.random() * 2;
                     }
                 }
             }
@@ -60,7 +60,10 @@
                     const x = Math.random() * canvas.width;
                     const y = Math.random() * canvas.height;
                     const radius = Math.random() * 2;
-                    const color = `rgba(255, 255, 255, ${Math.random() * 0.8 + 0.2})`;
+                    const hue = Math.random() * 35; // Varying hue between 0 and 35
+                    const saturation = Math.random() * 30 + 70; // Varying saturation between 70 and 100
+                    const lightness = Math.random() * 20 + 50; // Varying lightness between 50 and 70
+                    const color = `hsla(${hue}, ${saturation}%, ${lightness}%, ${Math.random() * 0.8 + 0.2})`;
                     const speed = Math.random() * 3 + 0.5;
     
                     stars.push(new Star(x, y, radius, color, speed));
