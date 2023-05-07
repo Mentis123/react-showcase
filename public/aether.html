@@ -42,10 +42,10 @@
                 }
     
                 update() {
-                    this.y += this.speed;
-                    if (this.y > canvas.height) {
-                        this.y = -this.radius;
-                        this.x = Math.random() * canvas.width;
+                    this.x -= this.speed;
+                    if (this.x < -this.radius) {
+                        this.x = canvas.width + this.radius;
+                        this.y = Math.random() * canvas.height;
                     }
                 }
             }
