@@ -6,6 +6,211 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aether - The Fifth Element</title>
     <style>
+           body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        #celebrationBanner {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            color: #ffffff;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        #celebrationBanner a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        #celebrationBanner a:hover {
+            color: #ffcc00;
+        }
+
+        /* Media queries for different screen resolutions and devices */
+        @media (max-width: 767px) {
+            #celebrationBanner {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #celebrationBanner {
+                font-size: 28px;
+            }
+        }
+        
+        #imageContainer {
+            position: absolute;
+            width: 30%;
+            max-width: 400px;
+            /* You can adjust the maximum width */
+            min-width: 200px;
+            /* You can adjust the minimum width */
+        }
+
+        #imageContainer img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Update media queries */
+        @media (max-width: 767px) {
+            #celebrationBanner {
+                font-size: 36px;
+            }
+
+            #imageContainer {
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #celebrationBanner {
+                font-size: 28px;
+            }
+
+            #imageContainer {
+                width: 70%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="aetherCanvas"></canvas>
+    <div id="celebrationBanner">
+        <a href="https://twitter.com/search?q=%40nftmentis%20%23100DaysOfChatGPT&src=typed_query"
+            target="_blank">Celebrating #100DaysOfChatGPT</a>
+    </div>
+    <div id="imageContainer">
+        <img id="hackGPTImage" src="hackgpt.jpg" alt="Hack GPT">
+    </div>
+    <script>
+        function init() {
+            const canvas = document.getElementById('aetherCanvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            class Star {
+                constructor(x, y, radius, color, speed) {
+                    this.x = x;
+                    this.y = y;
+                    this.radius = radius;
+                    this.color = color;
+                    this.speed = speed;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                    ctx.closePath();
+                }
+
+                update() {
+                    this.x -= this.speed;
+                    this.radius += this.speed * 0.01;
+
+                    if (this.x < -this.radius) {
+                        this.x = canvas.width + this.radius;
+                        this.y = Math.random() * canvas.height;
+                        this.radius = Math.random() * 2;
+
+                        hackGPTImage.addEventListener('load', () => {
+                            canvas.addEventListener('click', (event) => {
+                                const rect = canvas.getBoundingClientRect();
+                                const mouseX = event.clientX - rect.left;
+                                const mouseY = event.clientY - rect.top;
+
+                                const imageY = canvas.height / 2 - hackGPTImage.height / 2;
+
+                                if (mouseX >= imageX && mouseX <= imageX + hackGPTImage.width &&
+                                    mouseY >= imageY && mouseY <= imageY + hackGPTImage.height) {
+                                    window.open('https://www.hackgpt.tech/', '_blank');
+                                }
+                            });
+                        });
+                    }
+                }
+            }
+
+            function createStars(numStars) {
+                const stars = [];
+
+                for (let i = 0; i < numStars; i++) {
+                    const x = Math.random() * canvas.width;
+                    const y = Math.random() * canvas.height;
+                    const radius = Math.random() * 2;
+                    const hue = Math.random() * 35;
+                    const saturation = Math.random() * 30 + 70;
+                    const lightness = Math.random() * 20 + 50;
+                    const color = `hsla(${hue}, ${saturation}%, ${lightness}%, ${Math.random() * 0.8 + 0.2})`;
+                    const speed = Math.random() * 3 + 0.5;
+
+                    stars.push(new Star(x, y, radius, color, speed));
+                }
+
+                return stars;
+            }
+
+            const stars = createStars(500);
+
+            const hackGPTImage = new Image();
+            hackGPTImage.src = 'hackgpt.jpg';
+            let imageX = canvas.width;
+
+            function animate() {
+                requestAnimationFrame(animate);
+                ctx.fillStyle = 'black';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                for (const star of stars) {
+                    star.update();
+                    star.draw();
+                }
+
+                // Draw and update the position of the hackgpt.jpg image
+                const imageContainer = document.getElementById('imageContainer');
+                imageContainer.style.left = imageX + 'px';
+                imageContainer.style.top = (canvas.height / 2 - hackGPTImage.height / 2) + 'px';
+                imageX -= 2; // Adjust the speed of the image movement
+
+                if (imageX < -hackGPTImage.width) {
+                    imageX = canvas.width;
+                }
+            }
+
+            animate();
+        }
+
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether - The Fifth Element</title>
+    <style>
         body {
             margin: 0;
             overflow: hidden;
