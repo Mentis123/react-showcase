@@ -20,18 +20,19 @@
         function init() {
             const canvas = document.getElementById('aetherCanvas');
             const ctx = canvas.getContext('2d');
-
+    
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-
+    
             class Star {
-                constructor(x, y, radius, color) {
+                constructor(x, y, radius, color, speed) {
                     this.x = x;
                     this.y = y;
                     this.radius = radius;
                     this.color = color;
+                    this.speed = speed;
                 }
-
+    
                 draw() {
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
@@ -39,38 +40,49 @@
                     ctx.fill();
                     ctx.closePath();
                 }
+    
+                update() {
+                    this.y += this.speed;
+                    if (this.y > canvas.height) {
+                        this.y = -this.radius;
+                        this.x = Math.random() * canvas.width;
+                    }
+                }
             }
-
+    
             function createStars(numStars) {
                 const stars = [];
-
+    
                 for (let i = 0; i < numStars; i++) {
                     const x = Math.random() * canvas.width;
                     const y = Math.random() * canvas.height;
                     const radius = Math.random() * 2;
-                    const color = `rgba(255, 255, 255, ${Math.random() * 0.8 + 0.2})`; // Modify the alpha value
-
-                    stars.push(new Star(x, y, radius, color));
+                    const color = `rgba(255, 255, 255, ${Math.random() * 0.8 + 0.2})`;
+                    const speed = Math.random() * 3 + 0.5;
+    
+                    stars.push(new Star(x, y, radius, color, speed));
                 }
-
+    
                 return stars;
             }
-
+    
             const stars = createStars(500);
-
+    
             function animate() {
                 requestAnimationFrame(animate);
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+                ctx.fillStyle = 'black';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
                 for (const star of stars) {
+                    star.update();
                     star.draw();
                 }
             }
-
+    
             animate();
         }
-
+    
         window.addEventListener('load', init);
-    </script>
+    </script>    
 </body>
 </html>
