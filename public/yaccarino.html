@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Future of Twitter - Linda Yaccarino</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 40px);
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 40px;  /* Space below the SWOT rectangle */
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        #swotCanvas {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid black;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        @media only screen and (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>The Future of Twitter - Linda Yaccarino</h1>
+    <canvas id="swotCanvas" width="800" height="500"></canvas>
+    <script>
+        const canvas = document.getElementById('swotCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Scale canvas to fit container
+        const scale = Math.min(window.innerWidth / canvas.width, (window.innerHeight - 40) / canvas.height);
+        canvas.style.width = (canvas.width * scale) + 'px';
+        canvas.style.height = (canvas.height * scale) + 'px';
+
+        // Update canvas size on window resize
+        window.addEventListener('resize', () => {
+            const scale = Math.min(window.innerWidth / canvas.width, (window.innerHeight - 40) / canvas.height);
+            canvas.style.width = (canvas.width * scale) + 'px';
+            canvas.style.height = (canvas.height * scale) + 'px';
+        });
+
+        // Draw quadrants
+        ctx.beginPath();
+        ctx.moveTo(canvas.width / 2, 0);
+        ctx.lineTo(canvas.width / 2, canvas.height);
+        ctx.moveTo(0, canvas.height / 2);
+        ctx.lineTo(canvas.width, canvas.height / 2);
+        ctx.stroke();
+
+        // Word wrap function
+        function wrapText(context, text, x, y, maxWidth, lineHeight) {
+            var words = text.split(' ');
+            var line = '';
+
+            for(var n = 0; n < words.length; n++) {
+              var testLine = line + words[n] + ' ';
+              var metrics = context.measureText(testLine);
+              var testWidth = metrics.width;
+              if (testWidth > maxWidth && n > 0) {
+                context.fillText(line, x, y);
+                line = words[n] + ' ';
+                y += lineHeight;
+              }
+              else {
+                line = testLine;
+              }
+            }
+            context.fillText(line, x, y);
+            return y;
+        }
+
+        // Add quadrant labels and details
+        const labels = [
+            'Strengths:\n• Extensive experience in advertising, media, and strategic partnerships\n• Proven record of innovation, such as introducing the CFlight advertising metric\n• Demonstrated effective leadership skills',
+            'Weaknesses:\n• Lack of direct experience in social media\n• May face public and political scrutiny as a part of a social media platform\n• Tech-focused challenges might be out of her primary expertise',
+            'Opportunities:\n• Potential to increase Twitter\'s ad revenue\n• Leverage her experience in content strategy to enhance user engagement\n• Diversification of Twitter\'s offerings beyond the core social media platform',
+            'Threats:\n• Rapidly changing social media landscape\n• Regulatory pressures and potential legislation could impact Twitter\'s business model\n• Maintaining and growing user engagement is always a challenge'
+        ];
+        const labelPositions = [
+            { x: 10, y: 30 },
+            { x: canvas.width / 2 + 10, y: 30 },
+            { x: 10, y: canvas.height / 2 + 30 },
+            { x: canvas.width / 2 + 10, y: canvas.height / 2 + 30 }
+        ];
+
+        ctx.font = '20px Arial';
+        const lineHeight = 30;
+        const maxWidth = canvas.width / 2 - 20;  // 20px padding on either side
+        for (let i = 0; i < labels.length; i++) {
+            const lines = labels[i].split('\n');
+            let y = labelPositions[i].y;
+            for (let j = 0; j < lines.length; j++) {
+                y = wrapText(ctx, lines[j], labelPositions[i].x, y, maxWidth, lineHeight) + lineHeight;
+            }
+        }
+    </script>
+</body>
+</html>
