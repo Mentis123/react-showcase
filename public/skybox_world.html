@@ -1,61 +1,62 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>360 Image Viewer</title>
-        <style>
-            body { margin: 0; }
-            canvas { display: block; }
-        </style>
-    </head>
-    <body>
-        <script src="https://threejs.org/build/three.js"></script>
-        <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
-        <script>
-            var scene, camera, renderer, controls;
+<head>
+    <title>360 Image Viewer</title>
+    <style>
+        body { margin: 0; }
+        canvas { width: 100%; height: 100% }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
 
-            init();
-            animate();
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
 
-            function init() {
+    <script>
+        // Create a scene
+        var scene = new THREE.Scene();
 
-                scene = new THREE.Scene();
+        // Create a camera
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.target = new THREE.Vector3(0, 0, 0);
 
-                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1100);
-                camera.target = new THREE.Vector3(0, 0, 0);
+        // Create a renderer
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('container').appendChild(renderer.domElement);
 
-                renderer = new THREE.WebGLRenderer();
-                renderer.setPixelRatio(window.devicePixelRatio);
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                document.body.appendChild(renderer.domElement);
+        // Load a texture
+        var texture = new THREE.TextureLoader().load('skybox.jpg');
 
-                var geometry = new THREE.SphereBufferGeometry(500, 60, 40);
-                geometry.scale(-1, 1, 1);
+        // Create a sphere geometry
+        var geometry = new THREE.SphereGeometry(500, 60, 40);
+        geometry.scale(-1, 1, 1); // flip the geometry on the x-axis otherwise the photo will be inverted
 
-                var material = new THREE.MeshBasicMaterial({
-                    map: new THREE.TextureLoader().load('./skybox.jpg')
-                });
+        // Create a basic mesh material
+        var material = new THREE.MeshBasicMaterial({
+            map: texture
+        });
 
-                var mesh = new THREE.Mesh(geometry, material);
-                scene.add(mesh);
+        // Create a mesh with the geometry and material
+        var mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
 
-                controls = new THREE.OrbitControls(camera, renderer.domElement);
-                controls.enableZoom = false;
-                controls.enablePan = false;
+        // Add controls for user interaction
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableZoom = false;
+        controls.enablePan = false;
 
-                window.addEventListener('resize', onWindowResize, false);
-            }
+        // Set the initial position of the camera
+        camera.position.set(0, 0, 0.1);
 
-            function animate() {
-                requestAnimationFrame(animate);
-                controls.update();
-                renderer.render(scene, camera);
-            }
-
-            function onWindowResize() {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            }
-        </script>
-    </body>
+        // Render the image
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        animate();
+    </script>
+</body>
 </html>
