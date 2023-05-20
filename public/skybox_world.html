@@ -5,7 +5,17 @@
   </head>
   <body>
     <a-scene>
-      <a-sky src="skybox.jpg" rotation="0 -130 0"></a-sky>
+      <a-sky id="sky" src="skybox1.jpg" rotation="0 -130 0"></a-sky>
     </a-scene>
+
+    <script>
+      var images = ['skybox1.jpg', 'skybox2.jpg', 'skybox3.jpg', 'skybox4.jpg'];
+      var currentImage = 0;
+
+      setInterval(function() {
+        currentImage = (currentImage + 1) % images.length; // Cycle back to the first image
+        document.querySelector('#sky').setAttribute('src', images[currentImage]);
+      }, 9000); // Change image every 9 seconds
+    </script>
   </body>
 </html>
