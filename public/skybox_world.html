@@ -6,16 +6,19 @@
   <body>
     <a-scene>
       <a-sky id="sky" src="skybox1.jpg" rotation="0 -130 0"></a-sky>
+
+      <!-- Add a camera with reversed look-controls -->
+      <a-camera look-controls="reverseMouseDrag: true;"></a-camera>
     </a-scene>
 
     <script>
-      var images = ['skybox1.jpg', 'skybox2.jpg', 'skybox3.jpg', 'skybox4.jpg'];
+      var images = ['skybox1.jpg', 'skybox2.jpg', 'skybox3.jpg', 'skybox4.jpg', 'skybox5.jpg', 'skybox6.jpg', 'skybox7.jpg', 'skybox8.jpg'];
       var currentImage = 0;
 
       setInterval(function() {
         currentImage = (currentImage + 1) % images.length; // Cycle back to the first image
         document.querySelector('#sky').setAttribute('src', images[currentImage]);
-      }, 9000); // Change image every 9 seconds
+      }, 6900); // Change image every 6.9 seconds
     </script>
   </body>
 </html>
