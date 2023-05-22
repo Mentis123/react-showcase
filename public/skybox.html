@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <a-scene id="scene">
+        <a-sky id="sky"></a-sky>
+    </a-scene>
+
+    <script>
+        $(document).ready(function() {
+            var apiKey = '58HBFAnLayO3c4QptiJca2AcpU9tQhCzu74FdnoVqmZJfkZ0PoksSOpzAGXc'; // Replace with your API key
+            var prompt = 'cyberspace tokyo utopian futurescape'; // Replace with your prompt
+            var skyboxStyleId = '35'; // Replace with your style id
+
+            $.ajax({
+                url: 'https://backend.blockadelabs.com/api/v1/skybox?api_key=' + apiKey,
+                type: 'POST',
+                data: {
+                    'prompt': prompt,
+                    'skybox_style_id': skyboxStyleId
+                },
+                success: function(response) {
+                    var skyboxId = response.id;
+                    checkSkyboxStatus(skyboxId);
+                }
+            });
+
+            function checkSkyboxStatus(skyboxId) {
+                $.ajax({
+                    url: 'https://backend.blockadelabs.com/api/v1/skybox/' + skyboxId + '?api_key=' + apiKey,
+                    type: 'GET',
+                    success: function(response) {
+                        if (response.status === 'complete') {
+                            $('#sky').attr('src', response.file_url);
+                        } else {
+                            setTimeout(function() {
+                                checkSkyboxStatus(skyboxId);
+                            }, 5000);
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
