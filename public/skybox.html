@@ -12,7 +12,8 @@
 </head>
 <body>
     <a-scene id="scene">
-        <a-sky id="sky"></a-sky>
+        <!-- Set the source of the A-Frame sky element to the local file -->
+        <a-sky id="sky" src="skybox.jpg"></a-sky>
     </a-scene>
 
     <script>
@@ -40,6 +41,7 @@
                     type: 'GET',
                     success: function(response) {
                         if (response.status === 'complete') {
+                            // Update the source of the A-Frame sky element to the generated image
                             $('#sky').attr('src', response.file_url);
                         } else {
                             setTimeout(function() {
