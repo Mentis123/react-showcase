@@ -170,18 +170,26 @@
             });
           }, 3600); /* Changed from 1800 to 3600 */
 
-setInterval(() => {
-                // Randomly reassign the moving rings to different grids
-                const grids = Array.from(document.querySelectorAll('.grid'));
-                const movingRingsIndices = Array.from({length: movingRingsCount}, () => Math.floor(Math.random() * grids.length));
-                movingRings.fill(null);
-                movingRingsIndices.forEach((index, i) => {
-                    movingRings[index] = {
-                        x: Math.floor(Math.random() * 5),
-                        y: Math.floor(Math.random() * 5)
-                    };
-                });
-            }, 10000); // Changed from 5000 to 10000
+          setInterval(() => {
+    // Randomly reassign the moving rings to different grids
+    const grids = Array.from(document.querySelectorAll('.grid'));
+    const indices = Array.from({length: grids.length}, (_, i) => i);
+    const movingRingsIndices = [];
+
+    for (let i = 0; i < movingRingsCount; i++) {
+        const randomIndex = Math.floor(Math.random() * indices.length);
+        movingRingsIndices.push(indices[randomIndex]);
+        indices.splice(randomIndex, 1);
+    }
+
+    movingRings.fill(null);
+    movingRingsIndices.forEach((index, i) => {
+        movingRings[index] = {
+            x: Math.floor(Math.random() * 5),
+            y: Math.floor(Math.random() * 5)
+        };
+    });
+}, 10000); // Changed from 5000 to 10000
         }
     </script>
 </body>
