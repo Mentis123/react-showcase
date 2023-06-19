@@ -51,7 +51,7 @@
             border: 4.2px solid white;
             border-radius: 50%;
             position: absolute;
-            animation: pulse 2s ease-in-out infinite;
+            animation: pulse 4s ease-in-out infinite; /* Changed from 2s to 4s */
             transition: top 1.2s, left 1.2s, width 1.2s, height 1.2s, border-width 1.2s;
         }
         .ring::before {
@@ -106,13 +106,13 @@
                     ring.setAttribute('data-y', i);
 
                     const speed = Math.max(0.1, (Math.sin((i * i + j * j) / 10) + Math.cos((i * i + j * j) / 10) + 2) / 4);
-                    ring.style.animation = `rotate${speed > 0.5 ? 2 : 1} ${1.56 / speed}s linear infinite`;
+                    ring.style.animation = `rotate${speed > 0.5 ? 2 : 1} ${1.56 / speed * 2}s linear infinite`; /* Multiplied by 2 */
 
                     const colorSpeed = Math.max(0.1, (Math.sin((i * i - j * j) / 10) + Math.cos((i * i - j * j) / 10) + 2) / 4);
-                    ring.style.animation += `, colorChange ${1.56 / colorSpeed}s linear infinite`;
+                    ring.style.animation += `, colorChange ${1.56 / colorSpeed * 2}s linear infinite`; /* Multiplied by 2 */
 
                     const visibilitySpeed = Math.max(0.1, (Math.sin((i * i + j * j) / 10) - Math.cos((i * i + j * j) / 10) + 2) / 4);
-                    ring.style.animation += `, pulse ${1.56 / visibilitySpeed}s ease-in-out infinite`;
+                    ring.style.animation += `, pulse ${1.56 / visibilitySpeed * 2}s ease-in-out infinite`; /* Multiplied by 2 */
 
                     grid.appendChild(ring);
                 }
@@ -165,10 +165,10 @@
                         
                         emptySpace.x = x;
                         emptySpace.y = y;
-                    }, 1440);
+                    }, 2880); /* Changed from 1440 to 2880 */
                 }
             });
-          }, 1800);
+          }, 3600); /* Changed from 1800 to 3600 */
 
 setInterval(() => {
                 // Randomly reassign the moving rings to different grids
@@ -181,7 +181,7 @@ setInterval(() => {
                         y: Math.floor(Math.random() * 5)
                     };
                 });
-            }, 5000); // Change this to control how often the moving rings are reassigned
+            }, 10000); // Changed from 5000 to 10000
         }
     </script>
 </body>
