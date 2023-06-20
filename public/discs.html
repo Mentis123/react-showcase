@@ -22,7 +22,7 @@
         }
         body {
             background-color: black;
-            margin: 0;
+            margin: 20px 0 0;
             height: 100vh;
             display: grid;
             justify-content: center;
@@ -30,7 +30,7 @@
             grid-template-columns: repeat(5, 1fr);
             grid-template-rows: repeat(5, 1fr);
             gap: 10px;
-            padding: 25px;
+            padding: 50px;
             box-sizing: border-box;
         }
         .grid {
@@ -75,12 +75,40 @@
             left: 50%;
             transform: translateX(-50%);
         }
+        #toggleButton {
+          position: fixed;
+          top: 10px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: rgba(255, 255, 255, 0.5); /* 50% transparency */
+          color: black;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          z-index: 100;
+        }
     </style>
 </head>
 <body>
-  <script>
+    <button id="toggleButton">Toggle Puzzle</button>
+
+    <script>
       let enablePuzzle = true; // Change this to enable/disable the sliding tile puzzle feature
       let movingRingsCount = 25; // Change this to control the number of moving rings
+
+      function togglePuzzle() {
+          enablePuzzle = !enablePuzzle; // Toggle the value of enablePuzzle
+          const grids = document.querySelectorAll('.grid');
+
+          if (enablePuzzle) {
+              grids.forEach(grid => grid.style.display = 'grid');
+          } else {
+              grids.forEach(grid => grid.style.display = 'none');
+          }
+      }
+
+      document.getElementById('toggleButton').addEventListener('click', togglePuzzle);
 
       let movingRings = new Array(25).fill(null);
       for (let g = 0; g < 25; g++) {
