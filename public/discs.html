@@ -91,27 +91,30 @@
     </style>
 </head>
 <body>
-    <button id="toggleButton">Toggle Puzzle</button>
+  <button id="toggleButton">Toggle Puzzle</button>
 
-    <script>
-      let enablePuzzle = true; // Change this to enable/disable the sliding tile puzzle feature
-      let movingRingsCount = 25; // Change this to control the number of moving rings
+  <script>
+    let enablePuzzle = false;
+    let movingRingsCount = 25;
+    let movingRings = new Array(25).fill(null);
+    let interval1, interval2;
 
-      function togglePuzzle() {
-          enablePuzzle = !enablePuzzle; // Toggle the value of enablePuzzle
-          const grids = document.querySelectorAll('.grid');
+    function togglePuzzle() {
+        enablePuzzle = !enablePuzzle;
+        createGrid();
+    }
 
-          if (enablePuzzle) {
-              grids.forEach(grid => grid.style.display = 'grid');
-          } else {
-              grids.forEach(grid => grid.style.display = 'none');
-          }
-      }
+    function createGrid() {
+        // Clear existing intervals
+        clearInterval(interval1);
+        clearInterval(interval2);
 
-      document.getElementById('toggleButton').addEventListener('click', togglePuzzle);
+        // Remove existing grid
+        const oldGrids = document.querySelectorAll('.grid');
+        oldGrids.forEach(grid => grid.remove());
 
-      let movingRings = new Array(25).fill(null);
-      for (let g = 0; g < 25; g++) {
+        movingRings = new Array(25).fill(null);
+        for (let g = 0; g < 25; g++) {
           const grid = document.createElement('div');
           grid.className = 'grid';
 
@@ -151,7 +154,7 @@
         }
 
         if (enablePuzzle) {
-            setInterval(() => {
+              interval1 = setInterval(() => {
             const grids = document.querySelectorAll('.grid');
             grids.forEach((grid, index) => {
                 const movingRing = grid.querySelector('.moving');
@@ -198,7 +201,7 @@
             });
           }, 3600); /* Changed from 1800 to 3600 */
 
-          setInterval(() => {
+          interval2 = setInterval(() => {
     // Randomly reassign the moving rings to different grids
     const grids = Array.from(document.querySelectorAll('.grid'));
     const indices = Array.from({length: grids.length}, (_, i) => i);
@@ -218,7 +221,12 @@
         };
     });
 }, 10000); // Changed from 5000 to 10000
-        }
+}
+      }
+
+      document.getElementById('toggleButton').addEventListener('click', togglePuzzle);
+
+      createGrid();
     </script>
 </body>
 </html>
