@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Click the Object Game</title>
+    <style>
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        #gameArea {
+    position: relative;
+    height: 500px; /* increased from 400px to 500px */
+    width: 600px;
+    border: 1px solid black;
+    background-color: #ddd;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+
+        .clickableObject {
+            height: 100%;
+            width: 100%;
+            background-color: red;
+            border-radius: 50%;
+            box-sizing: border-box;
+            transition: background-color 0.5s, transform 1s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+        }
+
+        .clickableObject img {
+            height: 80%;
+            width: 80%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+
+        .clickableObject.spin img {
+            animation: spin 0.5s linear;
+        }
+
+        #score {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        #controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="score">Score: 0</div>
+    <div id="controls">
+        <button id="gameControl">Stop Game</button>
+        <button id="puzzleControl">Stop Puzzle</button>
+    </div>
+    <div id="gameArea"></div>
+
+    <script>
+        var score = 0;
+        var objects = [];
+        var orangeObject = null;
+        var emptyObject = null;
+        var gameRunning = true;
+        var puzzleRunning = true;
+
+        function createObjects() {
+            for (var i = 0; i < 25; i++) {
+                var obj = document.createElement('div');
+                obj.classList.add('clickableObject');
+                var img = document.createElement('img');
+                img.src = 'mentis.jpg';
+                obj.appendChild(img);
+                obj.addEventListener('click', function () {
+                    if (this.style.backgroundColor == 'orange') {
+                        score++;
+                        document.getElementById('score').textContent = 'Score: ' + score;
+                        this.classList.add('spin');
+                        setTimeout(() => this.classList.remove('spin'), 500);
+                        resetObjects();
+                    }
+                });
+                document.getElementById('gameArea').appendChild
+                    (obj);
+                objects.push(obj);
+            }
+            var randomIndex = Math.floor(Math.random() * objects.length);
+            emptyObject = objects[randomIndex];
+            emptyObject.style.backgroundColor = 'transparent';
+            resetObjects();
+        }
+
+        function resetObjects() {
+            objects.forEach(function (obj) {
+                if (obj !== emptyObject) {
+                    obj.style.backgroundColor = 'red';
+                }
+            });
+            if (gameRunning) {
+                setTimeout(function () {
+                    var randomIndex = Math.floor(Math.random() * objects.length);
+                    orangeObject = objects[randomIndex];
+                    if (orangeObject !== emptyObject) {
+                        orangeObject.style.backgroundColor = 'orange';
+                    }
+                    setTimeout(function () {
+                        if (orangeObject.style.backgroundColor == 'orange') {
+                            resetObjects();
+                        }
+                    }, 1000);
+                }, Math.random() * 1000 + 1000);
+            }
+            if (puzzleRunning) {
+                setTimeout(function () {
+                    var adjacentObjects = getAdjacentObjects(emptyObject);
+                    var randomIndex = Math.floor(Math.random() * adjacentObjects.length);
+                    var objectToMove = adjacentObjects[randomIndex];
+                    var tempTop = emptyObject.style.top;
+                    var tempLeft = emptyObject.style.left;
+                    emptyObject.style.top = objectToMove.style.top;
+                    emptyObject.style.left = objectToMove.style.left;
+                    objectToMove.style.top = tempTop;
+                    objectToMove.style.left = tempLeft;
+                    objectToMove.style.transform = 'translate(' + (emptyObject.offsetLeft - objectToMove.offsetLeft) + 'px, ' + (emptyObject.offsetTop - objectToMove.offsetTop) + 'px)';
+                    setTimeout(function () {
+                        objectToMove.style.transform = '';
+                        emptyObject = objectToMove;
+                    }, 1000);
+                }, Math.random() * 1000 + 1000);
+            }
+        }
+
+        function getAdjacentObjects(obj) {
+            var index = objects.indexOf(obj);
+            var adjacentIndices = [index - 5, index + 5];
+            if (index % 5 !== 0) adjacentIndices.push(index - 1);
+            if (index % 5 !== 4) adjacentIndices.push(index + 1);
+            return adjacentIndices.map(function (i) {
+                return objects[i];
+            }).filter(function (o) {
+                return o;
+            });
+        }
+
+        document.getElementById('gameControl').addEventListener('click', function () {
+            gameRunning = !gameRunning;
+            this.textContent = gameRunning ? 'Stop Game' : 'Start Game';
+            if (gameRunning) {
+                resetObjects();
+            }
+        });
+
+        document.getElementById('puzzleControl').addEventListener('click', function () {
+            puzzleRunning = !puzzleRunning;
+            this.textContent = puzzleRunning ? 'Stop Puzzle' : 'Start Puzzle';
+            if (puzzleRunning) {
+                resetObjects();
+            }
+        });
+
+        createObjects();
+    </script>
+</body>
+
+</html>
